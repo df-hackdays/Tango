@@ -28,7 +28,7 @@ public class WebSocketController {
     @GetMapping("/lol")
     public Breakpoint pushBreakpoint(){
         Breakpoint breakpoint =  BreakpointFactory.feedbackGeneral();
-        template.convertAndSend("/topic/greetings",breakpoint);
+        this.template.convertAndSend("/class", breakpoint);
         return breakpoint;
     }
 
