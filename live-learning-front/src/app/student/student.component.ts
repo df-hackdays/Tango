@@ -21,7 +21,7 @@ export class StudentComponent implements OnInit {
 
   	pairMessages:Message[] = [
   		{
-			text: 'Hi welcome to your learning partner for this concept!',
+			text: 'Hi you\'ve been invited to a private chat with a peer. Please use this time to discuss and go over the current concept!',
 			time: '1234',
 			direction: 'left',
 			type:'chatbot'
@@ -128,8 +128,9 @@ export class StudentComponent implements OnInit {
 	    		this.userService.setRoomId(pl[0].roomId);
 	    	}
 	    } else {
+	    	if(pl.studentId !== this.userService.getId())
 	    	this.pairMessages.push({
-				text: this.breakpoint.message,
+				text: pl.message,
 				time: '56788',
 				direction: 'left',
 				type:'student'
@@ -172,7 +173,7 @@ export class StudentComponent implements OnInit {
 		m.roomId = this.userService.getRoomId();
 		// TODO stomp send message to pair using roomid and proper stomp object
 		this.stompClient.send("/app/student/"+this.userService.getRoomId(), {},
-            JSON.stringify({studentId: this.userService.getId(), questionId: '123', answer: "stuffffffff"}));
+            JSON.stringify({studentId: this.userService.getId(), message: m.text}));
 		this.pairMessages.push({
 				text: m.text,
 				time: '56788',
