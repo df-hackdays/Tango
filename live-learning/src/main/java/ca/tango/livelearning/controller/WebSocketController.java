@@ -61,7 +61,7 @@ public class WebSocketController {
 
 
     @MessageMapping("/student/{roomId}")
-    private void sendMessageToPrivateTutoringSession(String message, @DestinationVariable String roomId) throws IOException {
+    private void sendMessageToPrivateTutoringSession(PrivateChat message, @DestinationVariable String roomId) throws IOException {
         this.template.convertAndSend("/privateTutoringChat/" + roomId, message);
     }
 
