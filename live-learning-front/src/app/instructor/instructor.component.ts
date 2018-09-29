@@ -45,8 +45,7 @@ export class InstructorComponent implements OnInit {
 
   	onConnected() {
     // Subscribe to the Public Topic
-    	let stompClient = this as any;
-	    stompClient.subscribe('/class', this.onMessageReceived);
+	    this.stompClient.subscribe('/class', this.onMessageReceived);
 	 
 	    // Tell your username to the server
 	    // stompClient.send("/app/chat.addUser",

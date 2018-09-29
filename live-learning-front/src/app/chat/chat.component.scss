@@ -21,6 +21,8 @@
 
 .chat-body {
 	margin-top: 40px;
+	    height: calc(100vh - 196px);
+	    overflow-y: scroll;
 }
 
 .chat {
@@ -109,4 +111,9 @@
 .message.student {
 	text-transform: capitalize;
 	font-size:10px;
+}
+
+.num-answer-btn {
+	display: inline-block;
+	padding:10px 10px;
 }

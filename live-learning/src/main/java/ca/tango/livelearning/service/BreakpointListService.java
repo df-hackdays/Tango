@@ -17,6 +17,15 @@ public class BreakpointListService {
         BreakpointFactory.outOf5("first question?");
         BreakpointFactory.outOf5("second question?");
         BreakpointFactory.outOf5("third Question?");
+        BreakpointFactory.outOf5("first question?");
+        BreakpointFactory.outOf5("second question?");
+        BreakpointFactory.outOf5("third Question?");
+        BreakpointFactory.outOf5("first question?");
+        BreakpointFactory.outOf5("second question?");
+        BreakpointFactory.outOf5("third Question?");
+        BreakpointFactory.outOf5("first question?");
+        BreakpointFactory.outOf5("second question?");
+        BreakpointFactory.outOf5("third Question?");
     }
 
     public Breakpoint pop() {

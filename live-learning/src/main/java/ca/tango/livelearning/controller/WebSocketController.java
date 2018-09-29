@@ -63,7 +63,7 @@ public class WebSocketController {
     }
 
     @MessageMapping("/student/send-breakpoint-answer")
-    @SendTo("/lecturer")
+    @SendTo("/class")
     public BreakpointAnswer answerBreakpoint(@Payload BreakpointAnswer answer, SimpMessageHeaderAccessor headerAccessor){
         return answer;
     }

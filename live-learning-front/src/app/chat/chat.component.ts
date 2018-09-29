@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, EventEmitter, Output } from '@angular/core';
 import { Message } from './Message';
 
 @Component({
@@ -7,12 +7,23 @@ import { Message } from './Message';
   styleUrls: ['./chat.component.scss']
 })
 
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnChanges {
 	@Input() messages: Message[];
+	@Output() messageResponse = new EventEmitter<Message>();
+
 	constructor() { }
 
 	ngOnInit() {
+		
+	}
 
+	ngOnChanges() {
+		
+	}
+
+	answerMessage(message, answer) {
+		message.option = answer;
+		this.messageResponse.emit(message);
 	}
 
 }

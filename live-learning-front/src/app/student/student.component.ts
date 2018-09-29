@@ -12,6 +12,8 @@ declare let Stomp: any;
 export class StudentComponent implements OnInit {
 	private stompClient;
 
+	breakpoint:any;
+
   constructor() { }
 
 
@@ -73,7 +75,7 @@ export class StudentComponent implements OnInit {
 
   	onConnected() {
     // Subscribe to the Public Topic
-	    this.stompClient.subscribe('/class', this.onMessageReceived);
+	    this.stompClient.subscribe('/class', this.onMessageReceived.bind(this));
 	 
 	    // Tell your username to the server
 	    // stompClient.send("/app/chat.addUser",
@@ -107,8 +109,26 @@ export class StudentComponent implements OnInit {
 	 
 	 
 	onMessageReceived(payload) {
-		debugger;
 	    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+	    this.breakpoint = JSON.parse(payload.body);
+
+	    this.messages.push({
+			text: this.breakpoint.question,
+			time: '56788',
+			direction: 'left',
+			type:'chatbot',
+			questionTypeEnum: this.breakpoint.questionTypeEnum,
+			options: this.breakpoint.options,
+			questionId: this.breakpoint.questionId
+		})
+	}
+
+	onResponded(m:Message){
+		// massage for server
+		m.answer = m.option;
+		m.type = m.questionTypeEnum;
+		console.log("responding to class status")
+  		this.stompClient.send("/app/student/send-breakpoint-answer", {}, JSON.stringify(m));
 	}
 
 }

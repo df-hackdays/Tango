@@ -12,7 +12,7 @@ import java.util.List;
 public class Breakpoint<T> {
     @Id
     String id;
-    QuestionTypeEnum questionType;
+    QuestionTypeEnum questionTypeEnum;
     String questionId;
     String question;
     List<T> options;

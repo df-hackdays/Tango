@@ -1,5 +1,5 @@
 <div class="chat">
-	<div class="chat-body">
+	<div class="chat-body" #scrollMe [scrollTop]="scrollMe.scrollHeight">
 		<div class="message" [ngClass]="{'left': message.direction==='left', 'right': message.direction==='right', 'chatbot': message.type==='chatbot', 'instructor': message.type==='instructor', 'self': message.type==='self', 'student': message.type==='student'}" *ngFor="let message of messages">
 			<div class="message-body">
 				<div class="text">
@@ -8,6 +8,12 @@
 				<div class="sender">
 					{{message.type}}
 				</div>
+				<div class="questionNumerical" *ngIf="message.questionTypeEnum==='INTEGER'">
+					<div *ngFor="let option of message.options" class="num-answer-btn">
+						<button class="btn btn-default" (click)="answerMessage(message, option)">{{option}}</button>
+					</div>
+				</div>
+				
 	<!-- 			<div class="time">
 					{{message.time}}
 				</div> -->
