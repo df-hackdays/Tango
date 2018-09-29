@@ -127,10 +127,12 @@ export class StudentComponent implements OnInit {
 	onResponded(m:Message){
 		// massage for server
 		m.answer = m.option;
+		const oldType = m.type;
 		m.type = m.questionTypeEnum;
 		m.studentId = this.userService.getId();
 		console.log("responding to class status")
   		this.stompClient.send("/app/student/send-breakpoint-answer", {}, JSON.stringify(m));
+  		m.type=oldType;
 	}
 
 }
