@@ -18,6 +18,4 @@ public class LiveLearningApplication {
         SpringApplication.run(LiveLearningApplication.class, args);
 
     }
-
-
 }

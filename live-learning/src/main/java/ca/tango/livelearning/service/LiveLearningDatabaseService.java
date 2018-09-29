@@ -31,6 +31,10 @@ public class LiveLearningDatabaseService {
         breakpointRepository.delete(breakpoint);
     }
 
+    public void deleteAllBreakpoints() {
+        breakpointRepository.deleteAll();
+    }
+
     public void insertStudentAnswer(StudentAnswer studentAnswer) {
         studentAnswer.setId(studentAnswer.getStudentId() + "_" + System.currentTimeMillis());
         studentAnswer.setIsCorrectAnswer(isCorrectAnswer(studentAnswer));
