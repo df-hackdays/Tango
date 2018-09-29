@@ -16,4 +16,5 @@ public class Breakpoint<T> {
     T questionId;
     String question;
     List<T> options;
+    boolean isGeneralFeedback;
 }

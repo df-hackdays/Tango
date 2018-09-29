@@ -19,6 +19,7 @@ public class BreakpointFactory {
         Breakpoint<Integer> breakpoint = new Breakpoint();
         breakpoint.setQuestion(question);
         breakpoint.setQuestionTypeEnum(QuestionTypeEnum.INTEGER);
+        breakpoint.setGeneralFeedback(true);
 
         List<Integer> answers = new ArrayList<>();
         IntStream.range(1, n + 1).forEach(x -> answers.add(x));

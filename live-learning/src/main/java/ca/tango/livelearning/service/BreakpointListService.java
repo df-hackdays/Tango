@@ -37,6 +37,8 @@ public class BreakpointListService {
     }
 
     public Breakpoint pop() {
-        return breakpoints.pop();
+        if (breakpoints.size() > 0)
+            return breakpoints.pop();
+        return BreakpointFactory.feedbackGeneral();
     }
 }

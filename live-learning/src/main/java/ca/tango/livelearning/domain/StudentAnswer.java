@@ -12,4 +12,5 @@ public class StudentAnswer<T> {
     String questionId;
     String studentId;
     T answer;
+    boolean isCorrectAnswer;
 }
