@@ -9,6 +9,7 @@ import { Message } from './Message';
 
 export class ChatComponent implements OnInit, OnChanges {
 	@Input() messages: Message[];
+	@Input() isPairChat: boolean;
 	@Output() messageResponse = new EventEmitter<Message>();
 
 	constructor() { }

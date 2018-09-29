@@ -99,9 +99,9 @@ export class StudentComponent implements OnInit {
 	    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
 	    let pl:any = JSON.parse(payload.body);
-
+	    
 	    // if this is abreakpoint payload
-	    if(!pl.studentId) {
+	    if(!pl.studentId && !pl[0]) {
 	    	this.breakpoint = JSON.parse(payload.body);
 
 		    this.messages.push({
@@ -115,13 +115,25 @@ export class StudentComponent implements OnInit {
 				questionId: this.breakpoint.questionId,
 				isGeneralFeedback: this.breakpoint.isGeneralFeedback
 			})
-	    } else if (pl.tutor) {
+	    } else if (pl[0]) {
 	    	this.isPairedChat = true;
-	    	if (this.userService.getId() === pl.tutor) {
+	    	if (this.userService.getId() === pl[0].tutorId && !this.userService.getRoomId()) {
 	    		// start a room with me as tutor
-	    	} else if (this.userService.getId() === pl.tutoree) {
+	    		this.stompClient.subscribe('/privateTutoringChat/'+pl[0].roomId, this.onMessageReceived.bind(this));
+	    		this.userService.setRoomId(pl[0].roomId);
+
+	    	} else if (this.userService.getId() === pl[0].tutoreeId && !this.userService.getRoomId()) {
 	    		// start a room with me as tutoree
+	    		this.stompClient.subscribe('/privateTutoringChat/'+pl[0].roomId, this.onMessageReceived.bind(this));
+	    		this.userService.setRoomId(pl[0].roomId);
 	    	}
+	    } else {
+	    	this.pairMessages.push({
+				text: this.breakpoint.question,
+				time: '56788',
+				direction: 'left',
+				type:'student'
+			})
 	    }
 	    
 	}
@@ -159,6 +171,19 @@ export class StudentComponent implements OnInit {
 		m.studentId = this.userService.getId();
 		m.roomId = this.userService.getRoomId();
 		// TODO stomp send message to pair using roomid and proper stomp object
+		this.stompClient.send("/app/student/"+this.userService.getRoomId(), {},
+            JSON.stringify({studentId: this.userService.getId(), questionId: '123', answer: "stuffffffff"}));
+		this.pairMessages.push({
+				text: m.text,
+				time: '56788',
+				direction: 'right',
+				type:'self',
+				// questionTypeEnum: this.breakpoint.questionTypeEnum,
+				// answer: this.breakpoint.answer,
+				// options: this.breakpoint.options,
+				// questionId: this.breakpoint.questionId,
+				// isGeneralFeedback: this.breakpoint.isGeneralFeedback
+			})
 
 
 	}

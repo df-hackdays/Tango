@@ -19,10 +19,10 @@ export class UserService {
   	}
 
   	setRoomId(roomId) {
-  		roomId = roomId;
+  		this.roomId = roomId;
   	}
 
   	getRoomId() {
-  		return roomId;
+  		return this.roomId;
   	}
 }
