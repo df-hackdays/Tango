@@ -8,7 +8,7 @@
 				<div class="sender">
 					{{message.type}}
 				</div>
-				<div class="questionNumerical" *ngIf="message.questionTypeEnum==='INTEGER'">
+				<div class="questionNumerical" *ngIf="message.questionTypeEnum">
 					<div *ngFor="let option of message.options" class="num-answer-btn">
 						<button class="btn btn-default" (click)="answerMessage(message, option)">{{option}}</button>
 					</div>

@@ -7,4 +7,6 @@ export class Message {
 	option: string,
 	questionId: string
 	mType: string;
+	isCorrectAnswer: boolean;
+	isGeneralFeedback: boolean;
 }

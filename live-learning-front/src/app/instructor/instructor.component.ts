@@ -50,7 +50,7 @@ export class InstructorComponent implements OnInit {
 
   askClassStatus(){
   	console.log("asking class status")
-  	this.stompClient.send("/app/lecturer/send-feedback-breakpoint", {}, "");
+  	this.stompClient.send("/app/lecturer/send-breakpoint", {}, "");
   	this.messages.push({
 		text: "You have asked your class for their level of understanding, please wait while their responses are gathered.",
 		time: '56788',
@@ -97,6 +97,7 @@ export class InstructorComponent implements OnInit {
 	onMessageReceived(payload) {
 		
 		let pl:any = JSON.parse(payload.body);
+		debugger;
 		if(pl.studentQuestion) {
 			this.messages.push({
 				text: "Your student " + pl.studentId + " has raised a question: " + pl.studentQuestion,
@@ -104,10 +105,18 @@ export class InstructorComponent implements OnInit {
 				direction: 'left',
 				type:'chatbot-issue',
 			})
-		} else if (pl.answer) {
+		} else if (pl.answer && pl.isGeneralQuestion) {
 	   		//debugger;
 		    this.messages.push({
 				text: "Your student " + pl.studentId + " has a " + pl.answer + "/5 understanding of this concept",
+				time: '56788',
+				direction: 'left',
+				type:'chatbot',
+			})
+		} else if (pl.answer) {
+	   		//debugger;
+		    this.messages.push({
+				text: "Your student " + pl.studentId + " has answered this question " + (pl.isCorrectAnswer ? "correctly" : "incorrectly"),
 				time: '56788',
 				direction: 'left',
 				type:'chatbot',

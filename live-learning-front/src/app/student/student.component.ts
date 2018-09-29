@@ -125,8 +125,10 @@ export class StudentComponent implements OnInit {
 				direction: 'left',
 				type:'chatbot',
 				questionTypeEnum: this.breakpoint.questionTypeEnum,
+				answer: this.breakpoint.answer,
 				options: this.breakpoint.options,
-				questionId: this.breakpoint.questionId
+				questionId: this.breakpoint.questionId,
+				isGeneralFeedback: this.breakpoint.isGeneralFeedback
 			})
 	    } else {
 
@@ -141,14 +143,15 @@ export class StudentComponent implements OnInit {
 
 			m.studentId = this.userService.getId();
 			this.stompClient.send("/app/student/send-question-to-lecturer", {}, JSON.stringify(m));
-		}
-		m.answer = m.option;
-		const oldType = m.type;
-		m.type = m.questionTypeEnum;
-		m.studentId = this.userService.getId();
-		console.log("responding to class status")
-  		this.stompClient.send("/app/student/send-breakpoint-answer", {}, JSON.stringify(m));
-  		m.type=oldType;
+		} else if (m.mType === "answer") { 
+			m.answer = m.option;
+			const oldType = m.type;
+			m.type = m.questionTypeEnum;
+			m.studentId = this.userService.getId();
+			console.log("responding to class status")
+	  		this.stompClient.send("/app/student/send-breakpoint-answer", {}, JSON.stringify(m));
+	  		m.type=oldType;
+  		}
 	}
 
 }
