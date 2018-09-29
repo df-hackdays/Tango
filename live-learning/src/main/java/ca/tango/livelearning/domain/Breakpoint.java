@@ -7,11 +7,11 @@ import org.springframework.data.annotation.Id;
 import java.util.List;
 
 @Data
-public class Breakpoint {
+public class Breakpoint<T> {
     @Id
     String id;
     String question;
-    List<Object> options;
+    List<T> options;
     long classId;
     boolean hasCorrectAnswer = false;
     QuestionTypeEnum questionTypeEnum;
