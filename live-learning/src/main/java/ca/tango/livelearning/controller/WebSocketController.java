@@ -27,11 +27,12 @@ public class WebSocketController {
 
     /**
      * to test websocket push from server
+     *
      * @return
      */
     @GetMapping("/lol")
-    public Breakpoint pushBreakpoint(){
-        Breakpoint breakpoint =  BreakpointFactory.feedbackGeneral();
+    public Breakpoint pushBreakpoint() {
+        Breakpoint breakpoint = BreakpointFactory.feedbackGeneral();
         this.template.convertAndSend("/class", breakpoint);
         return breakpoint;
     }
@@ -46,7 +47,7 @@ public class WebSocketController {
     @MessageMapping("/lecturer/send-feedback-breakpoint")
     @SendTo("/class")
     public Breakpoint sendFeedbackBreakpoint() {
-        Breakpoint breakpoint =  BreakpointFactory.feedbackGeneral();
+        Breakpoint breakpoint = BreakpointFactory.feedbackGeneral();
         return breakpoint;
     }
 
@@ -65,10 +66,15 @@ public class WebSocketController {
     }
 
     @MessageMapping("/student/send-breakpoint-answer")
-    @SendTo("/class")
-    public StudentAnswer answerBreakpoint(@Payload StudentAnswer answer, SimpMessageHeaderAccessor headerAccessor){
-        //answer.setId(answer.getStudentId() + System.currentTimeMillis());
+    @SendTo("/lecturer")
+    public StudentAnswer answerBreakpoint(@Payload StudentAnswer answer, SimpMessageHeaderAccessor headerAccessor) {
         liveLearningDatabaseService.insertStudentAnswer(answer);
         return answer;
+    }
+
+    @MessageMapping("/student/send-question-to-lecturer")
+    @SendTo("/lecturer")
+    public StudentQuestion sendQuestionToLecturer(@Payload StudentQuestion studentQuestion){
+        return studentQuestion;
     }
 }
