@@ -80,10 +80,10 @@ export class StudentComponent implements OnInit {
 	    this.stompClient.subscribe('/class', this.onMessageReceived.bind(this));
 	 
 	    // Tell your username to the server
-	    this.stompClient.send("/app/chat.addUser",
-	        {},
-	        JSON.stringify({sender: this.userService.getId(), type: 'JOIN'})
-	    )
+	    // this.stompClient.send("/app/chat.addUser",
+	    //     {},
+	    //     JSON.stringify({sender: this.userService.getId(), type: 'JOIN'})
+	    // )
  
     	// this.connectingElement.classList.add('hidden');
 	}
