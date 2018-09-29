@@ -72,4 +72,7 @@ public class LiveLearningDatabaseService {
         return studentAnswerRepository.findAll();
     }
 
+    public List<AnswerBreakpoint> findAllBreakpoints() {
+        return breakpointRepository.findAll();
+    }
 }
