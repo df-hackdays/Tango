@@ -1,0 +1,112 @@
+.chat-footer {
+	bottom: 0;
+    position: absolute;
+    padding: 20px;
+    width:100%;
+    border-top:4px solid #2C3E50;
+
+    input {
+    	width: calc(78% - 4px);
+    	margin-right: 4px;
+    	display:inline-block;
+    }
+
+    .input-group-btn {
+    	width: 22%;
+    }
+    button {
+    	width:100%;
+    }
+}
+
+.chat-body {
+	margin-top: 40px;
+}
+
+.chat {
+	position: relative;
+}
+
+@media screen and (max-width: 991px) {
+	.chat {
+		height:calc(100vh - 106px);
+	}
+}
+
+@media screen and (min-width: 992px) {
+	.chat {
+		height:calc(100vh - 106px);
+		width:768px;
+		border-right:4px solid #2C3E50;
+	}
+}
+
+.message {
+	
+	//position:relative;
+	    margin-bottom: 16px;
+	    
+	.message-body {
+		display:inline-block;
+		padding: 10px 24px;
+		border-radius: 16px;
+		//position: absolute;
+	}
+
+	.sender {
+		font-size:10px;
+	}
+}
+
+.message.left {
+	text-align:left;
+	margin-right:20%;
+	margin-left: 6px;
+	.message-body {
+		//left:0;
+	}
+}
+
+.message.right {
+	text-align:right;
+	margin-left:20%;
+    margin-right: 6px;
+	.message-body {
+		//right:0;
+	}
+}
+
+.message.chatbot {
+	.message-body {
+		background-color:orange;
+	}
+	.sender {
+		text-transform: uppercase;
+		font-size:8px;
+	}
+}
+
+.message.self {
+	.message-body {
+		background-color:lightgrey;
+	}
+	.sender {
+		text-transform: capitalize;
+		font-size:10px;
+	}
+}
+
+.message.instructor {
+	.message-body {
+		background-color:cadetblue;
+	}
+	.sender {
+		text-transform: capitalize;
+		font-size:10px;
+	}
+}
+
+.message.student {
+	text-transform: capitalize;
+	font-size:10px;
+}

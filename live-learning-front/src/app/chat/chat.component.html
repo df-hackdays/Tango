@@ -1,3 +1,26 @@
-<p>
-  chat works!
-</p>
+<div class="chat">
+	<div class="chat-body">
+		<div class="message" [ngClass]="{'left': message.direction==='left', 'right': message.direction==='right', 'chatbot': message.type==='chatbot', 'instructor': message.type==='instructor', 'self': message.type==='self', 'student': message.type==='student'}" *ngFor="let message of messages">
+			<div class="message-body">
+				<div class="text">
+					{{message.text}}
+				</div>
+				<div class="sender">
+					{{message.type}}
+				</div>
+	<!-- 			<div class="time">
+					{{message.time}}
+				</div> -->
+			</div>
+		</div>
+	</div>
+
+	<div class="chat-footer">
+		<div class="input-group">
+			<input class="form-control"/>
+			<span class="input-group-btn">
+		        <button class="btn btn-default" type="button">Send</button>
+		   </span>
+		</div>
+	</div>
+</div>

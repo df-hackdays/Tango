@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as SockJS from 'sockjs-client';
+import { Message } from '../chat/Message';
 
 declare let Stomp: any;
 
@@ -12,6 +13,41 @@ export class StudentComponent implements OnInit {
 	private stompClient;
 
   constructor() { }
+
+
+	messages:Message[] = [
+		{
+			text: 'first from',
+			time: '1234',
+			direction: 'left',
+			type:'chatbot'
+		},
+		{
+			text: 'second fromadsfad  sfadsfasdf to',
+			time: '4567',
+			direction: 'right',
+			type:'self'
+		},
+		{
+			text: 'third froasdfasdfadsfasdfasdfadsfadsf daf asdf adf asdf m from',
+			time: '6987',
+			direction: 'left',
+			type:'instructor'
+		},
+		{
+			text: 'fourth fro sdafsdfa sdf m to',
+			time: '7658',
+			direction: 'right',
+			type:'self'
+		},
+		{
+			text: 'fifth from',
+			time: '56788',
+			direction: 'left',
+			type:'chatbot'
+		}
+		
+	];
 
   ngOnInit() {
   	var ws = new SockJS('http://localhost:9853/ws/');
