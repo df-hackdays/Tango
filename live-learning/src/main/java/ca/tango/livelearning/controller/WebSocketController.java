@@ -1,10 +1,10 @@
 package ca.tango.livelearning.controller;
 
-import ca.tango.livelearning.domain.Breakpoint;
-import ca.tango.livelearning.domain.BreakpointAnswer;
-import ca.tango.livelearning.domain.BreakpointFactory;
-import ca.tango.livelearning.domain.ChatMessage;
+import ca.tango.livelearning.domain.*;
+import ca.tango.livelearning.enumeration.QuestionTypeEnum;
+import ca.tango.livelearning.repository.StudentAnswerRepository;
 import ca.tango.livelearning.service.BreakpointListService;
+import ca.tango.livelearning.service.LiveLearningDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -24,6 +24,9 @@ public class WebSocketController {
 
     @Autowired
     private SimpMessagingTemplate template;
+    
+    @Autowired
+    private LiveLearningDatabaseService liveLearningDatabaseService;
 
     @MessageMapping("/lecturer/send-breakpoint")
     @SendTo("/class")
@@ -34,7 +37,7 @@ public class WebSocketController {
     @MessageMapping("/lecturer/send-feedback-breakpoint")
     @SendTo("/class")
     public Breakpoint sendFeedbackBreakpoint() {
-        Breakpoint breakpoint =  BreakpointFactory.feedbackGeneral();
+        Breakpoint breakpoint = BreakpointFactory.feedbackGeneral();
         return breakpoint;
     }
 
@@ -54,7 +57,8 @@ public class WebSocketController {
 
     @MessageMapping("/student/send-breakpoint-answer")
     @SendTo("/lecturer")
-    public BreakpointAnswer answerBreakpoint(@Payload BreakpointAnswer answer, SimpMessageHeaderAccessor headerAccessor){
+    public StudentAnswer answerBreakpoint(@Payload StudentAnswer answer, SimpMessageHeaderAccessor headerAccessor) {
+        liveLearningDatabaseService.insertStudentAnswer(answer);
         return answer;
     }
 
@@ -63,4 +67,9 @@ public class WebSocketController {
         this.template.convertAndSend("/privateTutoringChat/" + roomId, message);
     }
 
+    @MessageMapping("/student/send-question-to-lecturer")
+    @SendTo("/lecturer")
+    public StudentQuestion sendQuestionToLecturer(@Payload StudentQuestion studentQuestion){
+        return studentQuestion;
+    }
 }
