@@ -1,8 +1,6 @@
 package ca.tango.livelearning.controller;
 
 import ca.tango.livelearning.domain.*;
-import ca.tango.livelearning.enumeration.QuestionTypeEnum;
-import ca.tango.livelearning.repository.StudentAnswerRepository;
 import ca.tango.livelearning.service.BreakpointListService;
 import ca.tango.livelearning.service.LiveLearningDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.io.IOException;
 
@@ -62,6 +59,7 @@ public class WebSocketController {
         return answer;
     }
 
+
     @MessageMapping("/student/{roomId}")
     private void sendMessageToPrivateTutoringSession(String message, @DestinationVariable String roomId) throws IOException {
         this.template.convertAndSend("/privateTutoringChat/" + roomId, message);
@@ -69,7 +67,7 @@ public class WebSocketController {
 
     @MessageMapping("/student/send-question-to-lecturer")
     @SendTo("/lecturer")
-    public StudentQuestion sendQuestionToLecturer(@Payload StudentQuestion studentQuestion){
+    public StudentQuestion sendQuestionToLecturer(@Payload StudentQuestion studentQuestion) {
         return studentQuestion;
     }
 }

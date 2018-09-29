@@ -1,4 +1,5 @@
 package ca.tango.livelearning.config;
+
 import ca.tango.livelearning.interceptor.HttpHandshakeInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
