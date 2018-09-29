@@ -24,7 +24,7 @@ public class LiveLearningApplication {
     }
 
     @PostConstruct
-    public void test() {
+    public void loadBreakpoints() {
 
         AnswerBreakpoint breakpoint = new AnswerBreakpoint();
         breakpoint.setQuestion("What is the best scripting language?");
