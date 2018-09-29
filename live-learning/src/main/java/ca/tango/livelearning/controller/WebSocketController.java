@@ -47,7 +47,6 @@ public class WebSocketController {
     @SendTo("/class")
     public Breakpoint sendFeedbackBreakpoint() {
         Breakpoint breakpoint =  BreakpointFactory.feedbackGeneral();
-        this.template.convertAndSend("/class", breakpoint);
         return breakpoint;
     }
 
