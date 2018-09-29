@@ -34,6 +34,10 @@ export class ChatComponent implements OnInit, OnChanges {
 			message.isCorrectAnswer = true;
 		}
 
+		if(message.isGeneralFeedback) {
+			message.isGenericQuestion;
+		}
+
 		message.option = answer;
 
 		message.mType = "answer";
