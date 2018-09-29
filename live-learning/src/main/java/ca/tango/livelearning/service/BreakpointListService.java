@@ -34,6 +34,7 @@ public class BreakpointListService {
         try {
             Resource resource = new ClassPathResource("/breakpointList.json");
             breakpoints = new ObjectMapper().readValue(resource.getFile(), new TypeReference<Stack<AnswerBreakpoint>>(){});
+            liveLearningDatabaseService.deleteAllBreakpoints();
             breakpoints.stream().forEach(x -> {
                 x.setQuestionId(System.currentTimeMillis());
                 liveLearningDatabaseService.insertBreakpoint(x);

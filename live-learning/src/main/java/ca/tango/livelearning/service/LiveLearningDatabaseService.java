@@ -1,19 +1,14 @@
 package ca.tango.livelearning.service;
 
 import ca.tango.livelearning.domain.AnswerBreakpoint;
-import ca.tango.livelearning.domain.Breakpoint;
 import ca.tango.livelearning.domain.StudentAnswer;
 import ca.tango.livelearning.repository.AnswerBreakpointRepository;
-import ca.tango.livelearning.repository.BreakpointRepository;
 import ca.tango.livelearning.repository.StudentAnswerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class LiveLearningDatabaseService {
@@ -34,6 +29,10 @@ public class LiveLearningDatabaseService {
 
     public void deleteBreakpoint(AnswerBreakpoint breakpoint) {
         breakpointRepository.delete(breakpoint);
+    }
+
+    public void deleteAllBreakpoints() {
+        breakpointRepository.deleteAll();
     }
 
     public void insertStudentAnswer(StudentAnswer studentAnswer) {
