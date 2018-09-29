@@ -74,23 +74,12 @@ export class InstructorComponent implements OnInit {
 	 
 	 
 	onError(error) {
-	    // connectingElement.textContent = 'Could not connect to WebSocket server. Please refresh this page to try again!';
-	    // connectingElement.style.color = 'red';
+
 	}
 	 
 	 
 	sendMessage(event) {
-	    // var messageContent = messageInput.value.trim();
-	    // if(messageContent && stompClient) {
-	    //     var chatMessage = {
-	    //         sender: username,
-	    //         content: messageInput.value,
-	    //         type: 'CHAT'
-	    //     };
-	    //     stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(chatMessage));
-	    //     messageInput.value = '';
-	    // }
-	    // event.preventDefault();
+
 	}
 	 
 	 
@@ -105,7 +94,7 @@ export class InstructorComponent implements OnInit {
 				direction: 'left',
 				type:'chatbot-issue',
 			})
-		} else if (pl.answer && pl.isGeneralQuestion) {
+		} else if (pl.answer && pl.isGenericQuestion) {
 	   		//debugger;
 		    this.messages.push({
 				text: "Your student " + pl.studentId + " has a " + pl.answer + "/5 understanding of this concept",
@@ -123,34 +112,7 @@ export class InstructorComponent implements OnInit {
 			})
 		}
 	    
-	    // var message = JSON.parse(payload.body);
-	 
-	    // var messageElement = document.createElement('li');
-	 
-	    // if(message.type === 'JOIN') {
-	    //     messageElement.classList.add('event-message');
-	    //     message.content = message.sender + ' joined!';
-	    // } else if (message.type === 'LEAVE') {
-	    //     messageElement.classList.add('event-message');
-	    //     message.content = message.sender + ' left!';
-	    // } else {
-	    //     messageElement.classList.add('chat-message');  
-	    //     var usernameElement = document.createElement('strong');
-	    //     usernameElement.classList.add('nickname');
-	    //     var usernameText = document.createTextNode(message.sender);
-	    //     var usernameText = document.createTextNode(message.sender);
-	    //     usernameElement.appendChild(usernameText);
-	    //     messageElement.appendChild(usernameElement);
-	    // }
-	 
-	    // var textElement = document.createElement('span');
-	    // var messageText = document.createTextNode(message.content);
-	    // textElement.appendChild(messageText);
-	 
-	    // messageElement.appendChild(textElement);
-	 
-	    // messageArea.appendChild(messageElement);
-	    // messageArea.scrollTop = messageArea.scrollHeight;
+
 	}
 
 }
