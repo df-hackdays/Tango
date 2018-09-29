@@ -8,12 +8,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Data
-@Document
+@Document(collection = "breakpoint")
 public class Breakpoint<T> {
     @Id
-    Long id;
+    Integer questionId;
     QuestionTypeEnum questionTypeEnum;
-    T questionId;
     String question;
     List<T> options;
 }
