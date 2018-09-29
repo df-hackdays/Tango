@@ -11,9 +11,9 @@ import java.util.List;
 @Document
 public class Breakpoint<T> {
     @Id
-    String id;
+    Long id;
     QuestionTypeEnum questionTypeEnum;
-    String questionId;
+    T questionId;
     String question;
     List<T> options;
 }
