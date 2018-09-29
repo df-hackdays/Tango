@@ -7,5 +7,4 @@ import lombok.Data;
 public class BreakpointAnswer {
     String studentId;
     Object answer;
-    QuestionTypeEnum type;
 }

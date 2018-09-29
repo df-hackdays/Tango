@@ -4,4 +4,5 @@ public enum QuestionTypeEnum {
     STRING,
     INTEGER,
     BOOLEAN;
+
 }
