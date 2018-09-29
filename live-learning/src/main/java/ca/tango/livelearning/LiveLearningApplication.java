@@ -21,13 +21,4 @@ public class LiveLearningApplication {
 
     }
 
-    @PostConstruct
-    public void test() {
-        StudentAnswer answer = new StudentAnswer();
-        answer.setAnswer("HTML");
-        answer.setQuestionId("123");
-        answer.setStudentId("abc");
-        liveLearningDatabaseService.insertStudentAnswer(answer);
-    }
-
 }
