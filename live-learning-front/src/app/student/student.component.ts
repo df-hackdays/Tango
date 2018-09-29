@@ -116,16 +116,18 @@ export class StudentComponent implements OnInit {
 				isGeneralFeedback: this.breakpoint.isGeneralFeedback
 			})
 	    } else if (pl[0]) {
-	    	this.isPairedChat = true;
 	    	if (this.userService.getId() === pl[0].tutorId && !this.userService.getRoomId()) {
 	    		// start a room with me as tutor
 	    		this.stompClient.subscribe('/privateTutoringChat/'+pl[0].roomId, this.onMessageReceived.bind(this));
 	    		this.userService.setRoomId(pl[0].roomId);
+	    		this.isPairedChat = true;
+	    		this.pairMessages[0].text = "Hello, based on your progress you\'ve been chosen to mentor a fellow Canada Learns Code student for the current course concept. Please use this time and private chat to discuss and go over the current concept!"
 
 	    	} else if (this.userService.getId() === pl[0].tutoreeId && !this.userService.getRoomId()) {
 	    		// start a room with me as tutoree
 	    		this.stompClient.subscribe('/privateTutoringChat/'+pl[0].roomId, this.onMessageReceived.bind(this));
 	    		this.userService.setRoomId(pl[0].roomId);
+	    		this.pairMessages[0].text = "Hi there, how about pairing up with a fellow colleague, to work on the current course concept. We've identified that this task might be better tackled in teams. Please use this time and private chat to discuss and go over the current course concept!"
 	    	}
 	    } else {
 	    	if(pl.studentId !== this.userService.getId())
@@ -158,6 +160,9 @@ export class StudentComponent implements OnInit {
 				// isGeneralFeedback: this.breakpoint.isGeneralFeedback
 			})
 		} else if (m.mType === "answer") { 
+			if(!m.questionId) {
+				m.questionId = "1";
+			}
 			m.answer = m.option;
 			const oldType = m.type;
 			m.type = m.questionTypeEnum;
