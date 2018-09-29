@@ -84,9 +84,8 @@ export class InstructorComponent implements OnInit {
 	 
 	 
 	onMessageReceived(payload) {
-		
-		let pl:any = JSON.parse(payload.body);
 		debugger;
+		let pl:any = JSON.parse(payload.body);
 		if(pl.studentQuestion) {
 			this.messages.push({
 				text: "Your student " + pl.studentId + " has raised a question: " + pl.studentQuestion,
@@ -102,7 +101,7 @@ export class InstructorComponent implements OnInit {
 				direction: 'left',
 				type:'chatbot',
 			})
-		} else if (pl.answer) {
+		} else if (pl.answer.toString()) {
 	   		//debugger;
 		    this.messages.push({
 				text: "Your student " + pl.studentId + " has answered this question " + (pl.isCorrectAnswer ? "correctly" : "incorrectly"),

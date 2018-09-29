@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static java.util.Map.Entry.comparingByValue;
-import static java.util.stream.Collectors.toMap;
 
 
 @Service
@@ -19,6 +17,9 @@ public class StudentPairingService {
 
     @Autowired
     LiveLearningDatabaseService liveLearningDatabaseService;
+
+    private static final Integer thresHold = new Integer(3);
+    private AtomicInteger threshHoldCount = new AtomicInteger(0);
 
     public List<StudentPair> studentPairs() {
         List<StudentPair> studentPairs = new ArrayList<StudentPair>();
@@ -43,8 +44,6 @@ public class StudentPairingService {
                 }
             }
         });
-
-
 
         System.out.println("studentCorrectAnswerCount : "+ studentCorrectAnswerCount);
         System.out.println("studentWrongAnswerCount : "+ studentWrongAnswerCount);

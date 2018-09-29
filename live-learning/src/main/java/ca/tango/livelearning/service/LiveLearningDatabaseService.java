@@ -36,14 +36,14 @@ public class LiveLearningDatabaseService {
     }
 
     public void insertStudentAnswer(StudentAnswer studentAnswer) {
-        studentAnswer.setId(studentAnswer.getStudentId() +"_"+ System.currentTimeMillis());
+        studentAnswer.setId(studentAnswer.getStudentId() + "_" + System.currentTimeMillis());
         studentAnswer.setIsCorrectAnswer(isCorrectAnswer(studentAnswer));
         studentAnswerRepository.insert(studentAnswer);
     }
 
     private Boolean isCorrectAnswer(StudentAnswer studentAnswer) {
-       Optional<AnswerBreakpoint> answerBreakpoint = breakpointRepository.findById(studentAnswer.getQuestionId());
-       if(answerBreakpoint.isPresent()) {
+        Optional<AnswerBreakpoint> answerBreakpoint = breakpointRepository.findById(studentAnswer.getQuestionId());
+        if (answerBreakpoint.isPresent()) {
             if (answerBreakpoint.get().getAnswer().equals(studentAnswer.getAnswer()))
                 return true;
             else
@@ -63,7 +63,7 @@ public class LiveLearningDatabaseService {
     public StudentAnswer findStudentAnswerById(String id) {
         Optional studentAnswer;
         studentAnswer = studentAnswerRepository.findById(id);
-        if(studentAnswer.isPresent())
+        if (studentAnswer.isPresent())
             return (StudentAnswer) studentAnswer.get();
         return null;
     }

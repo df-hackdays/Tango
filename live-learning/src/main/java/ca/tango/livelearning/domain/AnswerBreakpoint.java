@@ -8,6 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Data
 @Document(collection = "breakpoint")
-public class AnswerBreakpoint<T> extends Breakpoint{
+public class AnswerBreakpoint<T> extends Breakpoint {
     String answer;
 }

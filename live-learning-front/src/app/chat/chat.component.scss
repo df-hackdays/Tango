@@ -27,6 +27,7 @@
 
 .chat {
 	position: relative;
+	display:inline-block;
 }
 
 @media screen and (max-width: 991px) {
@@ -126,4 +127,10 @@
 .num-answer-btn {
 	display: inline-block;
 	padding:10px 10px;
+}
+
+@media screen and (min-width: 992px) {
+	.pair-chat {
+			width: calc(100vw - 820px);
+	}
 }

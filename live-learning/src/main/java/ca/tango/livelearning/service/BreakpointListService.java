@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.List;
 import java.util.Stack;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class BreakpointListService {
