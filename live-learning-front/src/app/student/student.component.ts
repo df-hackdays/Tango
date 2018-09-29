@@ -129,7 +129,7 @@ export class StudentComponent implements OnInit {
 	    	}
 	    } else {
 	    	this.pairMessages.push({
-				text: this.breakpoint.question,
+				text: this.breakpoint.message,
 				time: '56788',
 				direction: 'left',
 				type:'student'
