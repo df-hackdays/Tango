@@ -9,12 +9,28 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class WebSocketController {
     @Autowired
     BreakpointListService breakpointListService;
+
+    @Autowired
+    private SimpMessagingTemplate template;
+
+    /**
+     * to test websocket push from server
+     * @return
+     */
+    @GetMapping("/lol")
+    public Breakpoint pushBreakpoint(){
+        Breakpoint breakpoint =  BreakpointFactory.feedbackGeneral();
+        template.convertAndSend("/topic/greetings",breakpoint);
+        return breakpoint;
+    }
 
 
     @MessageMapping("/lecturer/send-breakpoint")
