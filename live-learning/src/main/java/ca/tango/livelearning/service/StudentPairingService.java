@@ -22,7 +22,13 @@ public class StudentPairingService {
 
 
     public List<StudentPair> studentPairs() {
-        return null;
+        List<StudentPair> sp = new ArrayList<>();
+        StudentPair studentPair = new StudentPair();
+        studentPair.setRoomId("12");
+        studentPair.setTutoreeId("2");
+        studentPair.setTutorId("3");
+        sp.add(studentPair);
+        return sp;
     }
 
 
