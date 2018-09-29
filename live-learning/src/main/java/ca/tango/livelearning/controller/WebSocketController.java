@@ -24,7 +24,7 @@ public class WebSocketController {
 
     @Autowired
     private SimpMessagingTemplate template;
-    
+
     @Autowired
     private LiveLearningDatabaseService liveLearningDatabaseService;
 
