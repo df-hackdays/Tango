@@ -24,14 +24,15 @@ connect();
  
 function onConnected() {
     // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/publicChatRoom', onMessageReceived);
- 
+  //  stompClient.subscribe('/topic/publicChatRoom', onMessageReceived);
+    stompClient.subscribe('/class', onBreakpointReceived)
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
-    )
- 
+    );
+    stompClient.send("/app/student/send-breakpoint-answer", {},
+        JSON.stringify({studentId: username, type: 'STRING', stringAnswer:'answerrr'}));
     connectingElement.classList.add('hidden');
 }
  
@@ -56,7 +57,12 @@ function sendMessage(event) {
     event.preventDefault();
 }
  
- 
+function onBreakpointReceived(payload)
+{
+    var breakpoint = JSON.parse(payload.body);
+    console.log("lol");
+    alert(JSON.stringify(breakpoint));
+}
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
  

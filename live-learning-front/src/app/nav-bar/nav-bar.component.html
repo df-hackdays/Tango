@@ -1,7 +1,7 @@
 <div class="container" style="padding-left: 0; padding-right: 0;margin-left:0;margin-right:0;min-width:100%;">
   <header class="navbar navbar-dark bg-dark navbar-fixed-top navbar-expand-lg">
 
-    <a class="navbar-brand" [routerLink]="['/home']" (click)="navbarCollapsed = true">Live-Learn</a>
+    <a class="navbar-brand" [routerLink]="['/']" (click)="navbarCollapsed = true">Live-Learn</a>
 
     <button class="navbar-toggler navbar-toggler-right" type="button" (click)="navbarCollapsed = !navbarCollapsed"
             [attr.aria-expanded]="!navbarCollapsed" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,7 +11,7 @@
     <div class="navbar-collapse" [ngbCollapse]="navbarCollapsed" id="navbarContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" [routerLinkActive]="['active']">
-          <a class="nav-link" [routerLink]="['/register']" (click)="navbarCollapsed = true">Register</a>
+          <a class="nav-link" [routerLink]="['/']" (click)="navbarCollapsed = true">Register</a>
         </li>
       </ul>
       <ul class="navbar-nav navbar-right">
