@@ -88,6 +88,16 @@
 	}
 }
 
+.message.chatbot {
+	.message-body {
+		background-color:lightcoral;
+	}
+	.sender {
+		text-transform: uppercase;
+		font-size:8px;
+	}
+}
+
 .message.self {
 	.message-body {
 		background-color:lightgrey;

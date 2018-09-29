@@ -55,7 +55,7 @@ export class InstructorComponent implements OnInit {
 
   	onConnected() {
     // Subscribe to the Public Topic
-	    this.stompClient.subscribe('/class', this.onMessageReceived);
+	    this.stompClient.subscribe('/lecturer', this.onMessageReceived.bind(this));
 	 
 	    // Tell your username to the server
 	    // stompClient.send("/app/chat.addUser",
@@ -89,24 +89,25 @@ export class InstructorComponent implements OnInit {
 	 
 	 
 	onMessageReceived(payload) {
-		debugger;
+		
 		let pl:any = JSON.parse(payload.body);
-
-	    // if this is abreakpoint payload
-	    if(pl.studentId) {
-	    	;
-		 //    this.messages.push({
-			// 	text: this.breakpoint.question,
-			// 	time: '56788',
-			// 	direction: 'left',
-			// 	type:'chatbot',
-			// 	questionTypeEnum: this.breakpoint.questionTypeEnum,
-			// 	options: this.breakpoint.options,
-			// 	questionId: this.breakpoint.questionId
-			// })
-	    } else {
-
-	    }
+		if(pl.studentQuestion) {
+			this.messages.push({
+				text: "Your student " + pl.studentId + " has raised a question: " + pl.studentQuestion,
+				time: '56788',
+				direction: 'left',
+				type:'chatbot-issue',
+			})
+		} else if (pl.answer) {
+	   		//debugger;
+		    this.messages.push({
+				text: "Your student " + pl.studentId + " has a " + pl.answer + "/5 understanding of this concept",
+				time: '56788',
+				direction: 'left',
+				type:'chatbot',
+			})
+		}
+	    
 	    // var message = JSON.parse(payload.body);
 	 
 	    // var messageElement = document.createElement('li');
