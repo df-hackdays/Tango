@@ -15,5 +15,5 @@ public class Breakpoint<T> {
     QuestionTypeEnum questionType;
     String questionId;
     String question;
-    List<String> options;
+    List<T> options;
 }
