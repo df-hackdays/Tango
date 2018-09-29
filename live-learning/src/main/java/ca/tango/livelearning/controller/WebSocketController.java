@@ -1,6 +1,7 @@
 package ca.tango.livelearning.controller;
 
 import ca.tango.livelearning.domain.Breakpoint;
+import ca.tango.livelearning.domain.BreakpointAnswer;
 import ca.tango.livelearning.domain.BreakpointFactory;
 import ca.tango.livelearning.domain.ChatMessage;
 import ca.tango.livelearning.service.BreakpointListService;
@@ -61,4 +62,9 @@ public class WebSocketController {
         return chatMessage;
     }
 
+    @MessageMapping("/student/send-breakpoint-answer")
+    @SendTo("/lecturer")
+    public BreakpointAnswer answerBreakpoint(@Payload BreakpointAnswer answer, SimpMessageHeaderAccessor headerAccessor){
+        return answer;
+    }
 }

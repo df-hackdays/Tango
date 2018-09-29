@@ -1,5 +1,6 @@
 package ca.tango.livelearning.domain;
 
+import ca.tango.livelearning.enumeration.QuestionTypeEnum;
 import lombok.Data;
 
 import java.util.List;
