@@ -20,7 +20,7 @@ public class BreakpointWebsocketController {
     @Autowired
     StudentPairingService studentPairingService;
 
-    @Scheduled(fixedRate = 5000)
+    @Scheduled(fixedRate = 1000*60*1)
     public List<StudentPair> pushBreakpoint() {
         List<StudentPair> studentPairs = studentPairingService.studentPairs();
         this.template.convertAndSend("/class", studentPairs);
