@@ -26,13 +26,19 @@ function onConnected() {
     // Subscribe to the Public Topic
   //  stompClient.subscribe('/topic/publicChatRoom', onMessageReceived);
     stompClient.subscribe('/class', onBreakpointReceived)
+    stompClient.subscribe('/lecturer', onBreakpointReceived)
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
         {},
         JSON.stringify({sender: username, type: 'JOIN'})
     );
+   // @Id
+   // String id;
+   // String questionId;
+   // String studentId;
+  //  T answer;
     stompClient.send("/app/student/send-breakpoint-answer", {},
-        JSON.stringify({studentId: username, type: 'STRING', stringAnswer:'answerrr'}));
+        JSON.stringify({studentId: username, questionId: '123', answer: "stuffffffff"}));
     connectingElement.classList.add('hidden');
 }
  

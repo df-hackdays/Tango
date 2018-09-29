@@ -23,6 +23,8 @@ public class LiveLearningDatabaseService {
     private static final AtomicInteger count = new AtomicInteger(0);
 
     public void insertBreakpoint(Breakpoint breakpoint) {
+        breakpoint.setId(System.currentTimeMillis());
+        breakpoint.setQuestionId(count.incrementAndGet());
         breakpointRepository.insert(breakpoint);
     }
 
