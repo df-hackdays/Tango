@@ -24,8 +24,8 @@ connect();
  
 function onConnected() {
     // Subscribe to the Public Topic
-    stompClient.subscribe('/topic/publicChatRoom', onMessageReceived);
- 
+   // stompClient.subscribe('/topic/publicChatRoom', onMessageReceived);
+    stompClient.subscribe('/class', onBreakpointReceived)
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
         {},
@@ -56,7 +56,12 @@ function sendMessage(event) {
     event.preventDefault();
 }
  
- 
+function onBreakpointReceived(payload)
+{
+    var breakpoint = JSON.parse(payload.body);
+    console.log("lol");
+    alert(JSON.stringify(breakpoint));
+}
 function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
  
