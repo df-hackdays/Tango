@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class LiveLearningDatabaseService {
@@ -18,6 +19,8 @@ public class LiveLearningDatabaseService {
 
     @Autowired
     private StudentAnswerRepository studentAnswerRepository;
+
+    private static final AtomicInteger count = new AtomicInteger(0);
 
     public void insertBreakpoint(Breakpoint breakpoint) {
         breakpointRepository.insert(breakpoint);
@@ -44,6 +47,7 @@ public class LiveLearningDatabaseService {
     }
 
     public void insertStudentAnswer(StudentAnswer studentAnswer) {
+        studentAnswer.setId(studentAnswer.getStudentId() +"_"+ System.currentTimeMillis());
         studentAnswerRepository.insert(studentAnswer);
     }
 
