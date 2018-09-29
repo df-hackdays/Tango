@@ -13,4 +13,5 @@ public class StudentAnswer<T> {
     String studentId;
     T answer;
     Boolean isCorrectAnswer;
+    Boolean isGenericQuestion;
 }
