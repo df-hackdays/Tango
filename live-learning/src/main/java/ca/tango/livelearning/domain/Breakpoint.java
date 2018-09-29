@@ -9,5 +9,5 @@ public class Breakpoint {
     String question;
     List<String> options;
     long programId;
-    boolean hasCorrectAnswer;
+    boolean hasCorrectAnswer = false;
 }
