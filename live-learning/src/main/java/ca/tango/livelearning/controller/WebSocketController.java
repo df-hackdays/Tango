@@ -6,6 +6,7 @@ import ca.tango.livelearning.domain.BreakpointFactory;
 import ca.tango.livelearning.domain.ChatMessage;
 import ca.tango.livelearning.service.BreakpointListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -14,6 +15,8 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.io.IOException;
+
 @Controller
 public class WebSocketController {
     @Autowired
@@ -21,18 +24,6 @@ public class WebSocketController {
 
     @Autowired
     private SimpMessagingTemplate template;
-
-    /**
-     * to test websocket push from server
-     * @return
-     */
-    @GetMapping("/lol")
-    public Breakpoint pushBreakpoint(){
-        Breakpoint breakpoint =  BreakpointFactory.feedbackGeneral();
-        this.template.convertAndSend("/class", breakpoint);
-        return breakpoint;
-    }
-
 
     @MessageMapping("/lecturer/send-breakpoint")
     @SendTo("/class")
@@ -66,4 +57,10 @@ public class WebSocketController {
     public BreakpointAnswer answerBreakpoint(@Payload BreakpointAnswer answer, SimpMessageHeaderAccessor headerAccessor){
         return answer;
     }
+
+    @MessageMapping("/student/{roomId}")
+    private void sendMessageToPrivateTutoringSession(String message, @DestinationVariable String roomId) throws IOException {
+        this.template.convertAndSend("/privateTutoringChat/" + roomId, message);
+    }
+
 }
