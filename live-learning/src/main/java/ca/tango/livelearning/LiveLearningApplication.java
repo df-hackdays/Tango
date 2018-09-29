@@ -1,5 +1,6 @@
 package ca.tango.livelearning;
 
+import ca.tango.livelearning.domain.AnswerBreakpoint;
 import ca.tango.livelearning.domain.Breakpoint;
 import ca.tango.livelearning.domain.StudentAnswer;
 import ca.tango.livelearning.enumeration.QuestionTypeEnum;
@@ -24,17 +25,20 @@ public class LiveLearningApplication {
 
     @PostConstruct
     public void test() {
+
+        AnswerBreakpoint breakpoint = new AnswerBreakpoint();
+        breakpoint.setQuestion("What is the best scripting language?");
+        breakpoint.setQuestionTypeEnum(QuestionTypeEnum.STRING);
+        breakpoint.setAnswer("JavaScript");
+        liveLearningDatabaseService.insertBreakpoint(breakpoint);
+
         StudentAnswer answer = new StudentAnswer();
-        answer.setAnswer("HTML");
-        answer.setQuestionId("123");
+        answer.setAnswer("JavaScript");
+        answer.setQuestionId(breakpoint.getQuestionId());
         answer.setStudentId("abc");
         liveLearningDatabaseService.insertStudentAnswer(answer);
 
-        Breakpoint breakpoint = new Breakpoint();
-        breakpoint.setQuestion("Some question");
-        breakpoint.setQuestionTypeEnum(QuestionTypeEnum.INTEGER);
-        breakpoint.setQuestionId("xyz");
-        liveLearningDatabaseService.insertBreakpoint(breakpoint);
+
     }
 
 }

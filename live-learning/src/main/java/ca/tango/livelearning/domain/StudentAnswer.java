@@ -9,8 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class StudentAnswer<T> {
     @Id
     String id;
-    String questionId;
+    Integer questionId;
     String studentId;
     T answer;
-    boolean isCorrectAnswer;
+    Boolean isCorrectAnswer;
+    Boolean isGenericQuestion;
 }
