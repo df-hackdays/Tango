@@ -30,13 +30,13 @@ export class ChatComponent implements OnInit, OnChanges {
 	}
 
 	answerMessage(message, answer) {
-
-		if(message.option === message.answer && message.questionTypeEnum && !message.isGeneralFeedback) {
+		debugger;
+		if(answer.toString() === message.answer && message.questionTypeEnum && !message.isGeneralFeedback) {
 			message.isCorrectAnswer = true;
 		}
 
 		if(message.isGeneralFeedback) {
-			message.isGenericQuestion;
+			message.isGenericQuestion = true;
 		}
 
 		message.option = answer;
