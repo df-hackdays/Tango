@@ -1,4 +1,4 @@
-<div class="chat">
+<div class="chat" [ngClass]="{'pair-chat': isPairChat}">
 	<div class="chat-body" #scrollMe [scrollTop]="scrollMe.scrollHeight">
 		<div class="message" [ngClass]="{'left': message.direction==='left', 'right': message.direction==='right', 'chatbot': message.type==='chatbot', 'instructor': message.type==='instructor', 'self': message.type==='self', 'student': message.type==='student', 'chatbot-issue': message.type==='chatbot-issue'}" *ngFor="let message of messages">
 			<div class="message-body">

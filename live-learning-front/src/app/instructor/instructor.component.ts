@@ -86,7 +86,6 @@ export class InstructorComponent implements OnInit {
 	onMessageReceived(payload) {
 		
 		let pl:any = JSON.parse(payload.body);
-		debugger;
 		if(pl.studentQuestion) {
 			this.messages.push({
 				text: "Your student " + pl.studentId + " has raised a question: " + pl.studentQuestion,
