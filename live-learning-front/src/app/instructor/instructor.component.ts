@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as SockJS from 'sockjs-client';
+import { Message } from '../chat/Message';
 
 declare let Stomp: any;
 
@@ -11,6 +12,40 @@ declare let Stomp: any;
 export class InstructorComponent implements OnInit {
 
 	private stompClient;
+
+	messages:Message[] = [
+		{
+			text: 'first from',
+			time: '1234',
+			direction: 'left',
+			type:'chatbot'
+		},
+		{
+			text: 'second fromadsfad  sfadsfasdf to',
+			time: '4567',
+			direction: 'right',
+			type:'self'
+		},
+		{
+			text: 'third froasdfasdfadsfasdfasdfadsfadsf daf asdf adf asdf m from',
+			time: '6987',
+			direction: 'left',
+			type:'instructor'
+		},
+		{
+			text: 'fourth fro sdafsdfa sdf m to',
+			time: '7658',
+			direction: 'right',
+			type:'self'
+		},
+		{
+			text: 'fifth from',
+			time: '56788',
+			direction: 'left',
+			type:'chatbot'
+		}
+		
+	];
 
   constructor() { }
 
@@ -79,6 +114,24 @@ export class InstructorComponent implements OnInit {
 	 
 	 
 	onMessageReceived(payload) {
+
+		let pl:any = JSON.parse(payload.body);
+
+	    // if this is abreakpoint payload
+	    if(pl.studentId) {
+	    	debugger;
+		 //    this.messages.push({
+			// 	text: this.breakpoint.question,
+			// 	time: '56788',
+			// 	direction: 'left',
+			// 	type:'chatbot',
+			// 	questionTypeEnum: this.breakpoint.questionTypeEnum,
+			// 	options: this.breakpoint.options,
+			// 	questionId: this.breakpoint.questionId
+			// })
+	    } else {
+
+	    }
 	    // var message = JSON.parse(payload.body);
 	 
 	    // var messageElement = document.createElement('li');
