@@ -31,7 +31,7 @@
 
 @media screen and (max-width: 991px) {
 	.chat {
-		height:calc(100vh - 106px);
+		height:calc(100vh - 126px);
 	}
 }
 
@@ -81,6 +81,16 @@
 .message.chatbot {
 	.message-body {
 		background-color:orange;
+	}
+	.sender {
+		text-transform: uppercase;
+		font-size:8px;
+	}
+}
+
+.message.chatbot-issue {
+	.message-body {
+		background-color:lightcoral;
 	}
 	.sender {
 		text-transform: uppercase;

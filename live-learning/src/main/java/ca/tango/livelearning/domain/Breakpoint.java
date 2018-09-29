@@ -15,4 +15,5 @@ public class Breakpoint<T> {
     QuestionTypeEnum questionTypeEnum;
     String question;
     List<T> options;
+    boolean isIsGeneralFeedback;
 }

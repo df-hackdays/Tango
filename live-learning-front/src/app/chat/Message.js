@@ -6,4 +6,5 @@ export class Message {
 	questionTypeEnum: string,
 	option: string,
 	questionId: string
+	mType: string;
 }

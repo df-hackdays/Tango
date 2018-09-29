@@ -21,8 +21,16 @@ export class ChatComponent implements OnInit, OnChanges {
 		
 	}
 
+	sendMessage(message) {
+		let m:any ={};
+		m.mType = "question";
+		m.text = message;
+		this.messageResponse.emit(m);
+	}
+
 	answerMessage(message, answer) {
 		message.option = answer;
+		message.mType = "answer";
 		this.messageResponse.emit(message);
 	}
 
