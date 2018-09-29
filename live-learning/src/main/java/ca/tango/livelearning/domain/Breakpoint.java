@@ -11,4 +11,5 @@ public class Breakpoint {
     List<String> options;
     long programId;
     boolean hasCorrectAnswer = false;
+    QuestionTypeEnum questionTypeEnum;
 }
