@@ -11,18 +11,43 @@
       "Digital Factory",
       "Mercury"
     ]
-  }
+  },
   {
-    "answer": "Earth",
+    "answer": 5,
     "id": 234905823094,
     "questionTypeEnum": "INTEGER",
     "questionId": 234905823094,
-    "question": "What is the third rock from the sun?",
+    "question": "What is the typical number of fingers on a human hand?",
     "isGeneralFeedback": false,
     "options": [
       1,
       2,
-      3
+      5
+    ]
+  },
+  {
+    "answer": true,
+    "id": 234905823094,
+    "questionTypeEnum": "BOOLEAN",
+    "questionId": 234905823094,
+    "question": "Does a cat always lands on their feet?",
+    "isGeneralFeedback": false,
+    "options": [
+      true,
+      false
+    ]
+  },
+  {
+    "answer": true,
+    "id": 234905823094,
+    "questionTypeEnum": "BOOLEAN",
+    "questionId": 234905823094,
+    "question": "Does a cat always lands on their feet?",
+    "isGeneralFeedback": false,
+    "options": [
+      true,
+      false
     ]
   }
+
 ]
