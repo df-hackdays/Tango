@@ -2,7 +2,8 @@
 	Enter room id whateverrr!!!
 </div>
 
-<button (click)="startStudent()">
+<input #email placeholder="gimme dat email"/>
+<button (click)="startStudent(email.value)">
 Enter as Student
 </button>
 

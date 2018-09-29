@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as SockJS from 'sockjs-client';
 import { Message } from '../chat/Message';
+import { UserService } from '../user.service'
 
 declare let Stomp: any;
 
@@ -11,10 +12,10 @@ declare let Stomp: any;
 })
 export class StudentComponent implements OnInit {
 	private stompClient;
-
+	userService:UserService;
 	breakpoint:any;
 
-  constructor() { }
+  	constructor(userService:UserService) { this.userService = userService; }
 
 
 	messages:Message[] = [
@@ -78,10 +79,10 @@ export class StudentComponent implements OnInit {
 	    this.stompClient.subscribe('/class', this.onMessageReceived.bind(this));
 	 
 	    // Tell your username to the server
-	    // stompClient.send("/app/chat.addUser",
-	    //     {},
-	    //     JSON.stringify({sender: 'instructor', type: 'JOIN'})
-	    // )
+	    this.stompClient.send("/app/chat.addUser",
+	        {},
+	        JSON.stringify({sender: this.userService.getId(), type: 'JOIN'})
+	    )
  
     	// this.connectingElement.classList.add('hidden');
 	}
@@ -127,6 +128,7 @@ export class StudentComponent implements OnInit {
 		// massage for server
 		m.answer = m.option;
 		m.type = m.questionTypeEnum;
+		m.studentId = this.userService.getId();
 		console.log("responding to class status")
   		this.stompClient.send("/app/student/send-breakpoint-answer", {}, JSON.stringify(m));
 	}
