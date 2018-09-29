@@ -14,9 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.List;
 import java.util.Stack;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class BreakpointListService {
@@ -33,7 +31,8 @@ public class BreakpointListService {
 
         try {
             Resource resource = new ClassPathResource("/breakpointList.json");
-            breakpoints = new ObjectMapper().readValue(resource.getFile(), new TypeReference<Stack<AnswerBreakpoint>>(){});
+            breakpoints = new ObjectMapper().readValue(resource.getFile(), new TypeReference<Stack<AnswerBreakpoint>>() {
+            });
             breakpoints.stream().forEach(x -> {
                 x.setQuestionId(System.currentTimeMillis());
                 liveLearningDatabaseService.insertBreakpoint(x);
