@@ -1,2 +1,4 @@
 server:
   port: 9853
+h2:
+   console: enabled
