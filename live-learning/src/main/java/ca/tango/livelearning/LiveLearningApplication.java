@@ -23,22 +23,6 @@ public class LiveLearningApplication {
 
     }
 
-    @PostConstruct
-    public void loadBreakpoints() {
 
-        AnswerBreakpoint breakpoint = new AnswerBreakpoint();
-        breakpoint.setQuestion("What is the best scripting language?");
-        breakpoint.setQuestionTypeEnum(QuestionTypeEnum.STRING);
-        breakpoint.setAnswer("JavaScript");
-        liveLearningDatabaseService.insertBreakpoint(breakpoint);
-
-        StudentAnswer answer = new StudentAnswer();
-        answer.setAnswer("JavaScript");
-        answer.setQuestionId(breakpoint.getQuestionId());
-        answer.setStudentId("abc");
-        liveLearningDatabaseService.insertStudentAnswer(answer);
-
-
-    }
 
 }

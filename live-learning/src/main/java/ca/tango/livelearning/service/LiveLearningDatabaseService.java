@@ -24,10 +24,7 @@ public class LiveLearningDatabaseService {
     @Autowired
     private StudentAnswerRepository studentAnswerRepository;
 
-    private static final AtomicInteger count = new AtomicInteger(0);
-
     public void insertBreakpoint(AnswerBreakpoint breakpoint) {
-        breakpoint.setQuestionId(count.incrementAndGet());
         breakpointRepository.insert(breakpoint);
     }
 

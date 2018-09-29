@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -15,21 +16,28 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.List;
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class BreakpointListService {
-    private static final Logger log = LoggerFactory.getLogger(BreakpointListService.class);
-    private Stack<Breakpoint> breakpoints = new Stack<>();
 
+    @Autowired
+    LiveLearningDatabaseService liveLearningDatabaseService;
+
+    private static final Logger log = LoggerFactory.getLogger(BreakpointListService.class);
+    private Stack<AnswerBreakpoint> breakpoints = new Stack<>();
 
     @PostConstruct
     public void initBreakpoints() throws IOException {
 
 
-        List<AnswerBreakpoint> answerBreakpoints = null;
         try {
             Resource resource = new ClassPathResource("/breakpointList.json");
-            answerBreakpoints = new ObjectMapper().readValue(resource.getFile(), new TypeReference<List<AnswerBreakpoint>>(){});
+            breakpoints = new ObjectMapper().readValue(resource.getFile(), new TypeReference<Stack<AnswerBreakpoint>>(){});
+            breakpoints.stream().forEach(x -> {
+                x.setQuestionId(System.currentTimeMillis());
+                liveLearningDatabaseService.insertBreakpoint(x);
+            });
         } catch (IOException e) {
             log.error("could not load /breakpointList.json", e);
             throw new IOException(e);
