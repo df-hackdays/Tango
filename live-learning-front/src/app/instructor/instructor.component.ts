@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as SockJS from 'sockjs-client';
-//import * as Stomp from 'stompjs';
 
 declare let Stomp: any;
 
@@ -21,7 +20,7 @@ export class InstructorComponent implements OnInit {
   	var ws = new SockJS('http://localhost:9853/ws/');
   	this.stompClient = Stomp.over(ws);
 
-  	this.stompClient.connect({}, this.onConnected, this.onError);
+  	this.stompClient.connect({}, () => this.onConnected(), this.onError);
 
 
 	 // sock.onopen = function() {

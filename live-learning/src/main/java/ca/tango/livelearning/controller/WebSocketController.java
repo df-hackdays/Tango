@@ -42,7 +42,9 @@ public class WebSocketController {
     @MessageMapping("/lecturer/send-feedback-breakpoint")
     @SendTo("/class")
     public Breakpoint sendFeedbackBreakpoint() {
-        return BreakpointFactory.feedbackGeneral();
+        Breakpoint breakpoint =  BreakpointFactory.feedbackGeneral();
+        this.template.convertAndSend("/class", breakpoint);
+        return breakpoint;
     }
 
     @MessageMapping("/chat.sendMessage")

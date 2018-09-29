@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as SockJS from 'sockjs-client';
-import * as Stomp from 'stompjs';
+
+declare let Stomp: any;
 
 @Component({
   selector: 'app-student',
@@ -16,7 +17,7 @@ export class StudentComponent implements OnInit {
   	var ws = new SockJS('http://localhost:9853/ws/');
   	this.stompClient = Stomp.over(ws);
 
-  	this.stompClient.connect({}, this.onConnected, this.onError);
+  	this.stompClient.connect({}, () => this.onConnected(), this.onError);
 
 
 	 // sock.onopen = function() {
@@ -36,13 +37,13 @@ export class StudentComponent implements OnInit {
 
   	onConnected() {
     // Subscribe to the Public Topic
-	    this.stompClient.subscribe('/topic/publicChatRoom', this.onMessageReceived);
+	    this.stompClient.subscribe('/class', this.onMessageReceived);
 	 
 	    // Tell your username to the server
-	    this.stompClient.send("/app/chat.addUser",
-	        {},
-	        JSON.stringify({sender: 'asdf', type: 'JOIN'})
-	    )
+	    // stompClient.send("/app/chat.addUser",
+	    //     {},
+	    //     JSON.stringify({sender: 'instructor', type: 'JOIN'})
+	    // )
  
     	// this.connectingElement.classList.add('hidden');
 	}
@@ -70,33 +71,8 @@ export class StudentComponent implements OnInit {
 	 
 	 
 	onMessageReceived(payload) {
-	    // var message = JSON.parse(payload.body);
-	 
-	    // var messageElement = document.createElement('li');
-	 
-	    // if(message.type === 'JOIN') {
-	    //     messageElement.classList.add('event-message');
-	    //     message.content = message.sender + ' joined!';
-	    // } else if (message.type === 'LEAVE') {
-	    //     messageElement.classList.add('event-message');
-	    //     message.content = message.sender + ' left!';
-	    // } else {
-	    //     messageElement.classList.add('chat-message');  
-	    //     var usernameElement = document.createElement('strong');
-	    //     usernameElement.classList.add('nickname');
-	    //     var usernameText = document.createTextNode(message.sender);
-	    //     var usernameText = document.createTextNode(message.sender);
-	    //     usernameElement.appendChild(usernameText);
-	    //     messageElement.appendChild(usernameElement);
-	    // }
-	 
-	    // var textElement = document.createElement('span');
-	    // var messageText = document.createTextNode(message.content);
-	    // textElement.appendChild(messageText);
-	 
-	    // messageElement.appendChild(textElement);
-	 
-	    // messageArea.appendChild(messageElement);
-	    // messageArea.scrollTop = messageArea.scrollHeight;
+		debugger;
+	    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 	}
+
 }
