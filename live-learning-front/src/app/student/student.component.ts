@@ -15,38 +15,23 @@ export class StudentComponent implements OnInit {
 	userService:UserService;
 	breakpoint:any;
 	payload:any;
+	isPairedChat: boolean = false;
 
   	constructor(userService:UserService) { this.userService = userService; }
 
-
-	messages:Message[] = [
-		{
-			text: 'first from',
+  	pairMessages:Message[] = [
+  		{
+			text: 'Hi welcome to your learning partner for this concept!',
 			time: '1234',
 			direction: 'left',
 			type:'chatbot'
 		},
+  	]
+
+	messages:Message[] = [
 		{
-			text: 'second fromadsfad  sfadsfasdf to',
-			time: '4567',
-			direction: 'right',
-			type:'self'
-		},
-		{
-			text: 'third froasdfasdfadsfasdfasdfadsfadsf daf asdf adf asdf m from',
-			time: '6987',
-			direction: 'left',
-			type:'instructor'
-		},
-		{
-			text: 'fourth fro sdafsdfa sdf m to',
-			time: '7658',
-			direction: 'right',
-			type:'self'
-		},
-		{
-			text: 'fifth from',
-			time: '56788',
+			text: 'Welcome to your CLC Event! Your instructor will be posting live tasks and feedback for you to complete here. Also, please feel free to ask the instructor a question at any time. They will answer it when they get a chance.',
+			time: '1234',
 			direction: 'left',
 			type:'chatbot'
 		}
@@ -130,8 +115,13 @@ export class StudentComponent implements OnInit {
 				questionId: this.breakpoint.questionId,
 				isGeneralFeedback: this.breakpoint.isGeneralFeedback
 			})
-	    } else {
-
+	    } else if (pl.tutor) {
+	    	this.isPairedChat = true;
+	    	if (this.userService.getId() === pl.tutor) {
+	    		// start a room with me as tutor
+	    	} else if (this.userService.getId() === pl.tutoree) {
+	    		// start a room with me as tutoree
+	    	}
 	    }
 	    
 	}
@@ -143,6 +133,17 @@ export class StudentComponent implements OnInit {
 
 			m.studentId = this.userService.getId();
 			this.stompClient.send("/app/student/send-question-to-lecturer", {}, JSON.stringify(m));
+			this.messages.push({
+				text: m.text,
+				time: '56788',
+				direction: 'right',
+				type:'self',
+				// questionTypeEnum: this.breakpoint.questionTypeEnum,
+				// answer: this.breakpoint.answer,
+				// options: this.breakpoint.options,
+				// questionId: this.breakpoint.questionId,
+				// isGeneralFeedback: this.breakpoint.isGeneralFeedback
+			})
 		} else if (m.mType === "answer") { 
 			m.answer = m.option;
 			const oldType = m.type;
@@ -152,6 +153,14 @@ export class StudentComponent implements OnInit {
 	  		this.stompClient.send("/app/student/send-breakpoint-answer", {}, JSON.stringify(m));
 	  		m.type=oldType;
   		}
+	}
+
+	onPairResponded(m:Message) {
+		m.studentId = this.userService.getId();
+		m.roomId = this.userService.getRoomId();
+		// TODO stomp send message to pair using roomid and proper stomp object
+
+
 	}
 
 }

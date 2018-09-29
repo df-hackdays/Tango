@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class UserService {
 
 	id: string;
+	roomId: string = '0';
 
   	constructor() { }
 
@@ -15,5 +16,13 @@ export class UserService {
 
   	getId() {
   		return this.id;
+  	}
+
+  	setRoomId(roomId) {
+  		roomId = roomId;
+  	}
+
+  	getRoomId() {
+  		return roomId;
   	}
 }
