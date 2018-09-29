@@ -14,6 +14,7 @@ export class StudentComponent implements OnInit {
 	private stompClient;
 	userService:UserService;
 	breakpoint:any;
+	payload:any;
 
   	constructor(userService:UserService) { this.userService = userService; }
 
@@ -79,10 +80,10 @@ export class StudentComponent implements OnInit {
 	    this.stompClient.subscribe('/class', this.onMessageReceived.bind(this));
 	 
 	    // Tell your username to the server
-	    this.stompClient.send("/app/chat.addUser",
-	        {},
-	        JSON.stringify({sender: this.userService.getId(), type: 'JOIN'})
-	    )
+	    // this.stompClient.send("/app/chat.addUser",
+	    //     {},
+	    //     JSON.stringify({sender: this.userService.getId(), type: 'JOIN'})
+	    // )
  
     	// this.connectingElement.classList.add('hidden');
 	}
@@ -111,17 +112,26 @@ export class StudentComponent implements OnInit {
 	 
 	onMessageReceived(payload) {
 	    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
-	    this.breakpoint = JSON.parse(payload.body);
 
-	    this.messages.push({
-			text: this.breakpoint.question,
-			time: '56788',
-			direction: 'left',
-			type:'chatbot',
-			questionTypeEnum: this.breakpoint.questionTypeEnum,
-			options: this.breakpoint.options,
-			questionId: this.breakpoint.questionId
-		})
+	    let pl:any = JSON.parse(payload.body);
+
+	    // if this is abreakpoint payload
+	    if(!pl.studentId) {
+	    	this.breakpoint = JSON.parse(payload.body);
+
+		    this.messages.push({
+				text: this.breakpoint.question,
+				time: '56788',
+				direction: 'left',
+				type:'chatbot',
+				questionTypeEnum: this.breakpoint.questionTypeEnum,
+				options: this.breakpoint.options,
+				questionId: this.breakpoint.questionId
+			})
+	    } else {
+
+	    }
+	    
 	}
 
 	onResponded(m:Message){

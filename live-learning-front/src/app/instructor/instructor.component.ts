@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as SockJS from 'sockjs-client';
-
+import { Message } from '../chat/Message';
 declare let Stomp: any;
 
 @Component({
@@ -11,6 +11,16 @@ declare let Stomp: any;
 export class InstructorComponent implements OnInit {
 
 	private stompClient;
+
+	messages:Message[] = [
+		{
+			text: 'Welcome to LiveLearn! Please press the button when you are done teaching a concept!',
+			time: '1234',
+			direction: 'left',
+			type:'chatbot'
+		}
+		
+	];
 
   constructor() { }
 
@@ -79,6 +89,24 @@ export class InstructorComponent implements OnInit {
 	 
 	 
 	onMessageReceived(payload) {
+		debugger;
+		let pl:any = JSON.parse(payload.body);
+
+	    // if this is abreakpoint payload
+	    if(pl.studentId) {
+	    	;
+		 //    this.messages.push({
+			// 	text: this.breakpoint.question,
+			// 	time: '56788',
+			// 	direction: 'left',
+			// 	type:'chatbot',
+			// 	questionTypeEnum: this.breakpoint.questionTypeEnum,
+			// 	options: this.breakpoint.options,
+			// 	questionId: this.breakpoint.questionId
+			// })
+	    } else {
+
+	    }
 	    // var message = JSON.parse(payload.body);
 	 
 	    // var messageElement = document.createElement('li');
