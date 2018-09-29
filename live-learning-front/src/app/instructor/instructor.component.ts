@@ -51,6 +51,12 @@ export class InstructorComponent implements OnInit {
   askClassStatus(){
   	console.log("asking class status")
   	this.stompClient.send("/app/lecturer/send-feedback-breakpoint", {}, "");
+  	this.messages.push({
+		text: "You have asked your class for their level of understanding, please wait while their responses are gathered.",
+		time: '56788',
+		direction: 'left',
+		type:'chatbot-issue',
+	})
   }
 
   	onConnected() {
