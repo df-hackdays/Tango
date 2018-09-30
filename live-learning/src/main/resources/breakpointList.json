@@ -32,14 +32,15 @@
     ]
   },
   {
-    "answer": true,
-    "questionTypeEnum": "BOOLEAN",
-    "question": "Does a cat always lands on their feet?",
-    "isGeneralFeedback": false,
-    "options": [
-      true,
-      false
-    ]
-  }
+  "answer": "Earth",
+  "questionTypeEnum": "STRING",
+  "question": "What is the third rock from the sun?",
+  "isGeneralFeedback": false,
+  "options": [
+    "Earth",
+    "Digital Factory",
+    "Mercury"
+  ]
+}
 
 ]
